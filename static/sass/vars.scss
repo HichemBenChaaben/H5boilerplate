@@ -1,0 +1,81 @@
+/*                                                     
+.sSSS s.    .sSSSSs.    .sSSSSSSSs. .sSSSSSSSs.      
+S SSS SSSs. S SSSSSSSs. S SSS SSSSS S SSS SSSS'      
+S  SS SSSSS S  SS SSSSS S  SS SSSS' S  SS            
+S..SS SSSSS S..SSsSSSSS S..SSsSSSa. `SSSSsSSSa.      
+ S::S SSSS  S:::S SSSSS S:::S SSSSS .sSSS SSSSS      
+  S;S SSS   S;;;S SSSSS S;;;S SSSSS S;;;S SSSSS      
+   SS SS    S%%%S SSSSS S%%%S SSSSS S%%%S SSSSS      
+    SsS     SSSSS SSSSS SSSSS SSSSS SSSSSsSSSSS  
+
+.AMC Neko 
+*/
+
+$headerBackground: #f0F0F0; 
+// blueprint config 
+$blueprint-grid-columns:24;
+$blueprint_grid_width: 40px;
+
+/*mixin breakpoints */
+@mixin breakpoint($viewport) {
+	/*
+		Mixin: breakpoint takes 1 argument viewport (desktop/tablet/mobile)
+		Description: takes arbitrary css and includes it as a media query for a specific viewport.
+		Usage:
+			.class {
+				attr:value;
+
+				@include breakpoint(mobile) {
+					attr: value;
+					.class {
+						attr: value;
+					}
+				}
+
+			}
+	*/
+	@if $viewport == desktop {
+		@media (min-width: 800px){
+			@content;
+		} 
+	}
+	@if $viewport == tablet {
+		@media (min-width: 760px) {
+			@content;
+		}
+	}
+	@else if $viewport == notebook {
+		@media (min-width: 480px) and (max-width: 759px)  {
+			@content;
+		}
+	}
+	@else if $viewport == mobile {
+		@media (min-width: 200px){ 
+			@content;
+		}
+	}
+}
+/*mixin clearfix */
+@import "compass/utilities/general/clearfix";
+
+@mixin clearfix {
+  overflow: hidden;
+  @include has-layout;
+}
+
+
+/* background gradiant */
+@mixin background-gradient($from, $to){
+	background: $from; /* Old browsers */
+	background: -moz-linear-gradient(top, $from 0%, $to 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to));
+	background: -webkit-linear-gradient(top, $from 0%,$to 100%);
+	background: -o-linear-gradient(top, $from 0%,$to 100%);
+	background: -ms-linear-gradient(top, $from 0%,$to 100%);
+	background: linear-gradient(to bottom, $from 0%,$to 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=0 );
+}
+/* box shadow */
+@mixin box-shadow(){
+	@include single-box-shadow;
+}
